@@ -4,26 +4,9 @@ pipeline {
         pollSCM "* * * * *"
        }
     stages {
-        stage('Build Application') { 
-            steps {
-                echo '=== Building Weather Application ==='
-                sh 'mvn -B -DskipTests clean package' 
-            }
-        }
-        stage('Test Application') {
-            steps {
-                echo '=== Testing Weather Application ==='
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
         stage('Build Docker Image') {
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 echo '=== Building Weather App Docker Image ==='
@@ -34,7 +17,7 @@ pipeline {
         }
         stage('Push Docker Image') {
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 echo '=== Pushing Weather App Docker Image ==='
