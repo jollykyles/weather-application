@@ -31,12 +31,12 @@ pipeline {
                 }
             }
         }
-        stage('Remove local images') {
-            steps {
-                echo '=== Delete the local docker images ==='
-                sh("docker rmi -f jollykyles/weather-app:latest || :")
-                sh("docker rmi -f jollykyles/weather-app:$SHORT_COMMIT || :")
-            }
-        }
+        // stage('Remove local images') {
+        //     steps {
+        //         echo '=== Delete the local docker images ==='
+        //         sh("sudo docker rmi -f jollykyles/weather-application:latest || :")
+        //         sh("sudo docker rmi -f jollykyles/weather-app:$SHORT_COMMIT || :")
+        //     }
+        // }
     }
 }
