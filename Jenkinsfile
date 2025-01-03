@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo '=== Building Weather App Docker Image ==='
                 script {
-                    app = docker.build("jollykyles/weather-application")
+                    app = docker.build("jollykyles/weather-app")
                 }
             }
         }
@@ -34,8 +34,8 @@ pipeline {
         stage('Remove local images') {
             steps {
                 echo '=== Delete the local docker images ==='
-                sh("docker rmi -f jollykyles/weather-application:latest || :")
-                sh("docker rmi -f jollykyles/weather-application:$SHORT_COMMIT || :")
+                sh("docker rmi -f jollykyles/weather-app:latest || :")
+                sh("docker rmi -f jollykyles/weather-app:$SHORT_COMMIT || :")
             }
         }
     }
