@@ -32,6 +32,23 @@ resource "aws_instance" "jenkins-instance" {
   }
 }
 
+resource "aws_instance" "weather-app-instance" {
+  ami             = "${data.aws_ami.amazon-linux-2.id}"
+  instance_type   = "t2.medium"
+  key_name        = "${var.keyname}"
+  #vpc_id          = "${aws_vpc.development-vpc.id}"
+  vpc_security_group_ids = ["${aws_security_group.sg_allow_ssh_jenkins.id}"]
+  subnet_id          = "${aws_subnet.public-subnet-1.id}"
+  #name            = "${var.name}"
+  user_data = "${file("run_app.sh")}"
+
+  associate_public_ip_address = true
+  tags = {
+    Name = "Weather-App-Instance"
+  }
+}
+
+
 resource "aws_security_group" "sg_allow_ssh_jenkins" {
   name        = "allow_ssh_jenkins"
   description = "Allow SSH and Jenkins traffic for Weather Application"
