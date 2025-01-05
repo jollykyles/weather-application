@@ -53,7 +53,10 @@ pipeline {
                     sh '''
                     # Configure AWS CLI to access the EKS cluster
                     aws eks --region $AWS_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
-                    
+        
+                    # Check if kubectl can access the cluster
+                    kubectl get nodes
+        
                     # Generate Kubernetes deployment and service YAML files
                     cat <<EOF > deployment.yaml
                     apiVersion: apps/v1
@@ -78,7 +81,7 @@ pipeline {
                             ports:
                             - containerPort: 8080
                     EOF
-
+        
                     cat <<EOF > service.yaml
                     apiVersion: v1
                     kind: Service
@@ -93,10 +96,11 @@ pipeline {
                         port: 80
                         targetPort: 8080
                     EOF
-
-                    # Apply the Kubernetes manifests
+        
+                    # Apply the Kubernetes manifests and output logs for debugging
                     kubectl apply -f deployment.yaml
                     kubectl apply -f service.yaml
+                    kubectl get all
                     '''
                 }
             }
