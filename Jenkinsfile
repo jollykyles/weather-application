@@ -5,7 +5,7 @@ pipeline {
     }
     environment {
         AWS_REGION = 'us-east-2'
-        EKS_CLUSTER_NAME = 'weather-clister'
+        EKS_CLUSTER_NAME = 'weather-cluster'
     }
     stages {
         stage('Build Docker Image') {
