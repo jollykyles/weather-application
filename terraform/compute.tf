@@ -135,11 +135,6 @@ resource "aws_iam_role_policy_attachment" "eks_node_policy_attach" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
 }
 
-resource "aws_iam_role_policy_attachment" "eks_vpc_policy_attach_node" {
-  role       = aws_iam_role.eks_node_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceforEC2Role"
-}
-
 resource "aws_eks_node_group" "weather-cluster-node-group" {
   cluster_name    = aws_eks_cluster.weather-cluster.name
   node_group_name = "weather-cluster-node-group"
