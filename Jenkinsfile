@@ -10,12 +10,12 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('db08df42-aeec-4196-a2ef-4aa3dbc26b8f')  // Jenkins ID for the AWS credentials
     }
 
-    stage('Configure Kubeconfig') {
-        steps {
-            sh 'aws eks --region us-east-2 update-kubeconfig --name weather-cluster'
-        }
-    }
     stages {
+        stage('Configure Kubeconfig') {
+            steps {
+                sh 'aws eks --region us-east-2 update-kubeconfig --name weather-cluster'
+            }
+        }
         stage('Build Docker Image') {
             when {
                 branch 'main'
