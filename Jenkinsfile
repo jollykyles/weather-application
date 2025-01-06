@@ -8,6 +8,7 @@ pipeline {
         EKS_CLUSTER_NAME = 'weather-cluster'
         AWS_ACCESS_KEY_ID = credentials('db08df42-aeec-4196-a2ef-4aa3dbc26b8f')  // Jenkins ID for the AWS credentials
         AWS_SECRET_ACCESS_KEY = credentials('db08df42-aeec-4196-a2ef-4aa3dbc26b8f')  // Jenkins ID for the AWS credentials
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
     }
 
     stages {
