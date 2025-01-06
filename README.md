@@ -53,16 +53,9 @@ The Kubernetes setup ensures high availability, fault tolerance, and the ability
 
 ## Deployment Instructions
 
-1. **Create Kubernetes Cluster**: 
-   - Set up an AWS EKS cluster using Terraform or AWS Management Console.
-   
-2. **Deploy Application**:
-   - Build and push Docker images to a container registry like Docker Hub or AWS ECR.
-   - Apply Kubernetes manifests to deploy pods, services, and other resources.
-   
-3. **Configure Jenkins**:
+1. **Deploy Services with Terraform**: 
+   - Run `terraform apply -auto-approve` to spin up all AWS resources.
+      
+2. **Configure Jenkins**:
    - Set up Jenkins with the provided credentials for automated builds.
-   - Create a Jenkinsfile that defines the build, test, and deploy pipeline.
-
-4. **Expose App via ELB**:
-   - The application is exposed through a **LoadBalancer** service in Kubernetes, enabling external access.
+   - Point Jenkins pipeline to Jenkinsfile.
